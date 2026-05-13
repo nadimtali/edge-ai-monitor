@@ -10,6 +10,7 @@ from src.utils.signal_processor import MovingAverageFilter
 from config import SENSOR_CONFIGS
 from src.detection.statistical_detector import StatisticalDetector
 from src.utils.system_report import SystemReporter
+from src.utils.snapshot_manager import SnapshotManager
 
 sensors = [
     SimulatedSensor(
@@ -68,6 +69,7 @@ while True:
         
 
         if ai_status == "ANOMALY":
+            SnapshotManager.save_snapshot(sensor.name, "AI_ALERT")
             print(f"[AI DETECTOR] {sensor.name} anomaly detected | z-score={score:.2f}")
             
             if status == "OK":
