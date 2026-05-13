@@ -1,8 +1,13 @@
 # Edge AI Monitor
 
+Author: Nadim Tali  
+Electrical Engineering Student – Microelectronics Specialization
+
 Real-time embedded monitoring and anomaly detection prototype built with Python.
 
 ![Demo](assets/demo_plot.png)
+
+---
 
 ## Overview
 
@@ -15,13 +20,14 @@ The system monitors:
 
 The platform includes:
 - Real-time live plotting
-- Statistical Anomaly Detection
-Uses rolling mean, standard deviation, and z-score analysis to detect unusual sensor behavior beyond fixed threshold limits.
 - Threshold-based anomaly detection
+- Statistical anomaly detection using rolling mean, standard deviation, and z-score analysis
 - Moving average filtering
 - Sensor event logging
 - CSV telemetry recording
 - Modular software architecture
+
+---
 
 ## Technologies Used
 
@@ -31,7 +37,18 @@ Uses rolling mean, standard deviation, and z-score analysis to detect unusual se
 - CSV logging
 - Object-oriented programming
 
+---
+
 ## System Architecture
+
+```text
+Sensors → Signal Processing → Threshold Detection
+        → Statistical AI Detection
+        → Event Logger
+        → Live Visualization
+```
+## Project Structure:
+```text
 
 edge-ai-monitor/
 │
@@ -41,18 +58,23 @@ edge-ai-monitor/
 │   ├── utils/
 │   └── visualization/
 │
+├── assets/
 ├── logs/
 ├── main.py
 ├── config.py
 └── requirements.txt
+```
 
-Author
-
-Nadim Tali
-Electrical Engineering Student – Microelectronics Specialization
-
+## How to Run:
 ```text
-Sensors → Signal Processing → Fault Detection → Event Logger → Live Visualization
-```bash
+
+Clone the repository:
+git clone https://github.com/nadimtali/edge-ai-monitor.git
+cd edge-ai-monitor
+
+Install dependencies:
 pip install -r requirements.txt
+
+Run the monitor:
 python main.py
+```
