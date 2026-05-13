@@ -1,6 +1,7 @@
 # Edge AI Monitor
 
 Real-time embedded monitoring and anomaly detection prototype built with Python.
+![Demo](assets/demo_plot.png)
 
 ## Overview
 
