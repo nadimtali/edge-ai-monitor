@@ -8,6 +8,7 @@ from src.detection.threshold_detector import ThresholdDetector
 from src.utils.event_logger import EventLogger
 from src.utils.signal_processor import MovingAverageFilter
 from config import SENSOR_CONFIGS
+from src.detection.statistical_detector import StatisticalDetector
 
 sensors = [
     SimulatedSensor(
@@ -27,6 +28,7 @@ plotter = LivePlot()
 logger = SensorLogger("logs/sensor_data.csv")
 event_logger = EventLogger("logs/events.csv")
 detector = ThresholdDetector()
+stat_detector = StatisticalDetector()
 
 for config in SENSOR_CONFIGS:
     detector.add_threshold(
@@ -61,11 +63,15 @@ while True:
         value = round(filter_system.update(sensor.name, raw_value), 2)
         
         status = detector.check(sensor.name, value)
+        ai_status, score = stat_detector.check(sensor.name, value)
+
+        if ai_status == "ANOMALY":
+            print(f"[AI DETECTOR] {sensor.name} anomaly detected | z-score={score:.2f}")
 
         plotter.update(sensor.name, value, status)
         logger.log(sensor.name, raw_value, value, status)
         event_logger.log_event(sensor.name, value, status)
-
+        
 
         readings.append({
             "name": sensor.name,
@@ -73,6 +79,9 @@ while True:
             "unit": sensor.unit,
             "status": status,
         })
+
+    if status == "ANOMALY":
+        print(f"[AI DETECTOR] {sensor.name} anomaly detected | z-score={score:.2f}")
 
     statuses = [reading["status"] for reading in readings]
 
