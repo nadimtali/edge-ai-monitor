@@ -1,38 +1,54 @@
 # Edge AI Monitor
 
-A real-time embedded monitoring and anomaly detection prototype built with Python.
+Real-time embedded monitoring and anomaly detection prototype built with Python.
 
 ## Overview
 
-This project simulates an embedded monitoring system that tracks multiple sensor signals in real time, including motor temperature, vibration, and RPM.
+This project simulates an edge AI monitoring system that continuously tracks sensor data in real time and detects abnormal operating conditions using lightweight processing algorithms.
 
-The system includes live visualization, threshold-based fault detection, moving average filtering, telemetry logging, and event logging.
+The system monitors:
+- Motor temperature
+- Vibration levels
+- RPM (rotational speed)
 
-## Features
+The platform includes:
+- Real-time live plotting
+- Threshold-based anomaly detection
+- Moving average filtering
+- Sensor event logging
+- CSV telemetry recording
+- Modular software architecture
 
-- Multi-sensor simulation
-- Real-time live plots
-- Warning and critical threshold detection
-- Moving average signal filtering
-- CSV telemetry logging
-- Fault event logging
-- Configurable sensor parameters
-
-## Technologies
+## Technologies Used
 
 - Python
 - Matplotlib
+- NumPy
 - CSV logging
-- Modular software architecture
+- Object-oriented programming
 
-## Current Sensors
+## System Architecture
 
-- Motor Temperature
-- Vibration
-- RPM
+edge-ai-monitor/
+│
+├── src/
+│   ├── detection/
+│   ├── sensors/
+│   ├── utils/
+│   └── visualization/
+│
+├── logs/
+├── main.py
+├── config.py
+└── requirements.txt
 
-## How to Run
+Author
 
+Nadim Tali
+Electrical Engineering Student – Microelectronics Specialization
+
+```text
+Sensors → Signal Processing → Fault Detection → Event Logger → Live Visualization
 ```bash
 pip install -r requirements.txt
 python main.py
