@@ -9,6 +9,7 @@ from src.utils.event_logger import EventLogger
 from src.utils.signal_processor import MovingAverageFilter
 from config import SENSOR_CONFIGS
 from src.detection.statistical_detector import StatisticalDetector
+from src.utils.system_report import SystemReporter
 
 sensors = [
     SimulatedSensor(
@@ -64,9 +65,13 @@ while True:
         
         status = detector.check(sensor.name, value)
         ai_status, score = stat_detector.check(sensor.name, value)
+        
 
         if ai_status == "ANOMALY":
             print(f"[AI DETECTOR] {sensor.name} anomaly detected | z-score={score:.2f}")
+            
+            if status == "OK":
+                status = "AI ALERT"
 
         plotter.update(sensor.name, value, status)
         logger.log(sensor.name, raw_value, value, status)
@@ -78,6 +83,7 @@ while True:
             "value": value,
             "unit": sensor.unit,
             "status": status,
+            "ai_score": round(score, 2),
         })
 
     if status == "ANOMALY":
@@ -95,20 +101,8 @@ while True:
     ok_count = statuses.count("OK")
     warning_count = statuses.count("WARNING")
     critical_count = statuses.count("CRITICAL")
-
-    print("\n==============================")
-    print(f"System Status: {system_status}")
-    print(f"OK: {ok_count} | WARNING: {warning_count} | CRITICAL: {critical_count}")
-    print("------------------------------")
-
-    for reading in readings:
-        print(
-            f"{reading['name']}: "
-            f"{reading['value']} {reading['unit']} "
-            f"[{reading['status']}]"
-        )
-
-    print("==============================")
+    
+    SystemReporter.print_summary(readings, system_status)
 
     plotter.draw()
 

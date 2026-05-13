@@ -3,7 +3,7 @@ import statistics
 
 
 class StatisticalDetector:
-    def __init__(self, window_size=20, z_threshold=2.5):
+    def __init__(self, window_size=30, z_threshold=3.0):
         self.window_size = window_size
         self.z_threshold = z_threshold
         self.history = {}
@@ -17,7 +17,7 @@ class StatisticalDetector:
 
         values = self.history[sensor_name]
 
-        if len(values) < 5:
+        if len(values) < self.window_size:
             values.append(value)
             return "OK", 0.0
 
