@@ -15,6 +15,8 @@ The system monitors:
 
 The platform includes:
 - Real-time live plotting
+- Statistical Anomaly Detection
+Uses rolling mean, standard deviation, and z-score analysis to detect unusual sensor behavior beyond fixed threshold limits.
 - Threshold-based anomaly detection
 - Moving average filtering
 - Sensor event logging
