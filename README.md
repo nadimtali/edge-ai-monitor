@@ -19,6 +19,7 @@ The system monitors:
 - RPM (rotational speed)
 
 The platform includes:
+- Machine learning based fault classification using a trained Random Forest model
 - Real-time live plotting
 - Threshold-based anomaly detection
 - Statistical anomaly detection using rolling mean, standard deviation, and z-score analysis
@@ -36,7 +37,9 @@ The platform includes:
 - NumPy
 - CSV logging
 - Object-oriented programming
-
+- Scikit-learn
+- Joblib
+- Pandas
 ---
 
 ## System Architecture
@@ -64,6 +67,11 @@ edge-ai-monitor/
 ├── config.py
 └── requirements.txt
 ```
+## Model Evaluation
+
+Confusion matrix of the trained Random Forest fault classifier:
+
+![Confusion Matrix](assets/confusion_matrix.png)
 
 ## How to Run:
 ```text
