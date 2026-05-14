@@ -26,7 +26,8 @@ class SystemReporter:
                 f"{reading['name']}: "
                 f"{reading['value']} {reading['unit']} "
                 f"[{reading['status']}] "
-                f"(AI score: {reading['ai_score']})"
+                f"(AI score: {reading['ai_score']}) "
+                f"| ML prediction: {reading['ml_prediction']}"
             )
 
         print("==============================")
