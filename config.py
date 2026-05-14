@@ -36,3 +36,11 @@ SENSOR_CONFIGS = [
         "critical_limit": 2600,
     },
 ]
+STATISTICAL_CONFIG = {
+    "window_size": 30,
+    "z_threshold": 3.0
+}
+
+SNAPSHOT_CONFIG = {
+    "enabled": True
+}

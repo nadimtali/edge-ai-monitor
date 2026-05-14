@@ -11,6 +11,7 @@ from config import SENSOR_CONFIGS
 from src.detection.statistical_detector import StatisticalDetector
 from src.utils.system_report import SystemReporter
 from src.utils.snapshot_manager import SnapshotManager
+from config import STATISTICAL_CONFIG, SNAPSHOT_CONFIG
 
 sensors = [
     SimulatedSensor(
@@ -30,8 +31,10 @@ plotter = LivePlot()
 logger = SensorLogger("logs/sensor_data.csv")
 event_logger = EventLogger("logs/events.csv")
 detector = ThresholdDetector()
-stat_detector = StatisticalDetector()
-
+stat_detector = StatisticalDetector(
+    window_size=STATISTICAL_CONFIG["window_size"],
+    z_threshold=STATISTICAL_CONFIG["z_threshold"]
+)
 for config in SENSOR_CONFIGS:
     detector.add_threshold(
         config["name"],
@@ -69,9 +72,11 @@ while True:
         
 
         if ai_status == "ANOMALY":
-            SnapshotManager.save_snapshot(sensor.name, "AI_ALERT")
-            print(f"[AI DETECTOR] {sensor.name} anomaly detected | z-score={score:.2f}")
-            
+            if SNAPSHOT_CONFIG["enabled"]:
+                SnapshotManager.save_snapshot(sensor.name, "AI_ALERT")
+            print(
+        f"[AI DETECTOR] {sensor.name} anomaly detected | z-score={score:.2f}"
+    )
             if status == "OK":
                 status = "AI ALERT"
 
